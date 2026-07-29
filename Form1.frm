@@ -38,12 +38,12 @@ Begin VB.Form FireCallMain
       Appearance      =   0  'Flat
       BackColor       =   &H00E0E0E0&
       Height          =   1395
-      Left            =   135
+      Left            =   150
       MultiSelect     =   2  'Extended
       OLEDragMode     =   1  'Automatic
       OLEDropMode     =   1  'Manual
       TabIndex        =   36
-      Top             =   720
+      Top             =   630
       Visible         =   0   'False
       Width           =   7245
    End
@@ -690,13 +690,13 @@ Begin VB.Form FireCallMain
       BackColor       =   &H00E0E0E0&
       Height          =   4125
       ItemData        =   "Form1.frx":77CF8
-      Left            =   135
+      Left            =   150
       List            =   "Form1.frx":77CFA
       MultiSelect     =   2  'Extended
       OLEDragMode     =   1  'Automatic
       OLEDropMode     =   1  'Manual
       TabIndex        =   2
-      Top             =   675
+      Top             =   630
       Width           =   7245
    End
    Begin VB.CommandButton btnEmojiSet 
@@ -2289,8 +2289,9 @@ Public Sub formLoadTasks()
     recording = False
     playing = False
     
-    lbxOutputTextArea.Left = 120
-    lbxOutputTextArea.Top = 4920
+    
+    ' set the absolute positions of the input and output text boxes
+    Call setAbsoluteTextBoxPositions
     
     ' read available audio input devices
     Call enumerateRecordingDevices
@@ -2469,6 +2470,36 @@ Public Sub enumerateRecordingDevices()
     'End If
 End Sub
 
+
+'
+'---------------------------------------------------------------------------------------
+' Procedure : setAbsoluteTextBoxPositions
+' Author    : beededea
+' Date      : 29/07/2026
+' Purpose   : set the absolute positions of the input and output text boxes
+'---------------------------------------------------------------------------------------
+'
+Private Sub setAbsoluteTextBoxPositions()
+    
+    On Error GoTo setAbsoluteTextBoxPositions_Error
+
+    lbxOutputTextArea.Left = 150
+    lbxOutputTextArea.Top = 4920
+    
+    lbxInputTextArea.Left = 150
+    lbxInputTextArea.Top = 660
+    
+    lbxCombinedTextArea.Left = 150
+    lbxCombinedTextArea.Top = 660
+
+    On Error GoTo 0
+    Exit Sub
+
+setAbsoluteTextBoxPositions_Error:
+
+     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure setAbsoluteTextBoxPositions of Form FireCallMain"
+    
+End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : setBackups
