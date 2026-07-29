@@ -690,7 +690,7 @@ Begin VB.Form FireCallMain
       BackColor       =   &H00E0E0E0&
       Height          =   4125
       ItemData        =   "Form1.frx":77CF8
-      Left            =   150
+      Left            =   180
       List            =   "Form1.frx":77CFA
       MultiSelect     =   2  'Extended
       OLEDragMode     =   1  'Automatic
@@ -2289,7 +2289,6 @@ Public Sub formLoadTasks()
     recording = False
     playing = False
     
-    
     ' set the absolute positions of the input and output text boxes
     Call setAbsoluteTextBoxPositions
     
@@ -2795,9 +2794,9 @@ End Sub
 Private Sub handleScrollbars()
     Dim lLength As Long: lLength = 0
     
-    'disable the scrollbars for the input listbox
    On Error GoTo handleScrollbars_Error
-
+   
+    'disable the scrollbars for the input listbox
     If FCWEnableScrollbars = "0" Then
         Call SendMessageByNum(lbxInputTextArea.hwnd, LB_SETHORIZONTALEXTENT, 0, 0&)
         Call ShowScrollBar(lbxInputTextArea.hwnd, SB_VERT, False)  ' hides the vertical scrollbar
@@ -4266,12 +4265,12 @@ btnRefresh_Click_Error:
 
     MsgBox "Error " & err.Number & " (" & err.Description & ") in procedure btnRefresh_Click of Form FireCallMain"
 End Sub
-' when clicking upon a line in the output box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
+
 '---------------------------------------------------------------------------------------
 ' Procedure : lbxOutputTextArea_Click
 ' Author    : beededea
 ' Date      : 12/07/2023
-' Purpose   :
+' Purpose   : when clicking upon a line in the output box, display any image found in that line, also hide any unwanted scrollbars that VB6 automatically puts back
 '---------------------------------------------------------------------------------------
 '
 Private Sub lbxOutputTextArea_Click() '(Optional ByRef frm As Form)
@@ -4292,10 +4291,9 @@ Private Sub lbxOutputTextArea_Click() '(Optional ByRef frm As Form)
     Else
         outputScrollBarTimer.Enabled = False
     End If
+        
     Call lbxTextAreaClick(lbxOutputTextArea)
     
-    ' MsgBox "lbxOutputTextAreaHasFocus = " & lbxOutputTextAreaHasFocus
-
    On Error GoTo 0
    Exit Sub
 
